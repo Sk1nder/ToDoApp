@@ -1,0 +1,49 @@
+{% include "header.html" %}
+
+{% block content %}
+
+    <main class="mb-4">
+      <div class="container">
+        <div class="row">
+            {% if not tasks %}
+                <div >
+                    <h4 class="task-title">There is no tasks completed.</h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="{{url_for('tasks.to_do_list') }}" class="nav-link px-2 text-body-secondary">Show tasks to do.</a>
+                </div>
+            {% else %}
+                <form class="task-preview" action="{{url_for('tasks.get_status')}}" method="post">
+                    {% for task in tasks %}
+                        <div class="task mb-4">
+                            <div class="container">
+                                <div class="row">
+                                    <h4 class="task-title"> {{ task.title }}</h4>
+                                </div>
+                                <div class="row">
+                                    <h5 class="task-subtitle">{{ task.description }}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4"> <b>Start:</b> {{task.startDate.strftime("%d-%m-%Y %H:%M")}} </div>
+                                    <div class="col-4"> <b>Deadline:</b> {{task.deadline.strftime("%d-%m-%Y %H:%M")}} </div>
+                                    {% if task.endDate %}
+                                    <div class="col-4"> <b>Complete date:</b> {{task.endDate.strftime("%d-%m-%Y %H:%M")}} </div>
+                                    {% else %}
+                                    <div class="col-4"> <b>Complete date:</b> {{task.deadline.strftime("%d-%m-%Y %H:%M")}} </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                    {% endfor %}
+                </form>
+            {% endif %}
+            </div>
+        </div>
+      </div>
+    </main>
+
+{% endblock %}
+
+{% include "footer.html" %}

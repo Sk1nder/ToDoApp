@@ -1,0 +1,36 @@
+{% include "header.html" %}
+{% from "bootstrap5/form.html" import render_form, render_field %}
+{% block content %}
+
+  {% if is_auth %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <form method="POST">
+          {{ render_field(form.titleField, novalidate=True) }}
+          {{ render_field(form.descriptionField, novalidate=True) }}
+
+            <div class="d-flex align-items-center">
+              <div class="col-lg-12 col-md-10 d-flex justify-content-between">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.deadlineField, class="form-control", id="DateField") }}
+                  <div class="align-self-center">
+                    {{ render_field(form.submitField, novalidate=True, button_map={"submit": "primary"}) }}
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+  {% else %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p class="lead">Login for add new task. </p>
+        <a type="button" class="btn btn-warning btn-lg me-2" href="{{ url_for('auth.login') }}">Login</a>
+      </div>
+  {% endif %}
+
+{% endblock %}
+
+{% include "footer.html" %}

@@ -1,0 +1,7 @@
+    a.h4-link {
+        font-size: 24px; /* Rozmiar czcionki jak w h4 */
+        font-weight: bold; /* Grubość czcionki jak w h4 */
+        margin: 1.em 0; /* Margines jak w h4 */
+        color: inherit; /* Dziedziczenie koloru tekstu */
+        text-decoration: none; /* Usunięcie podkreślenia */
+    }
